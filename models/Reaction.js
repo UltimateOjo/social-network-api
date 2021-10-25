@@ -9,7 +9,7 @@ const reactionSchema = new Schema(
       reactionBody: {
         type: String,
         required: 'Reaction is Required',
-        validate: [({ length }) => length <= 280, 'Cannon exceed 280 characters.']
+        validate: [({ length }) => length <= 280, 'Cannot exceed 280 characters.']
       },
       username: {
         type: String,
