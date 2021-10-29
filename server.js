@@ -44,8 +44,7 @@ app.get('/api/users:id', ({ params, body }, res) => {
     });
 });
 
-app.post('/api/users', (req, res) => {
-  console.log(req);
+app.post('/api/users', ({ body }, res) => {
   User.create(body)
     .then(dbNote => {
       res.json(dbNote);
@@ -56,7 +55,6 @@ app.post('/api/users', (req, res) => {
 });
 
 app.put('/api/users:id', ({ params }, res) => {
-  console.log(params);
   User.findOneAndUpdate({ _id: params.id })
     .then(dbNote => {
       if (!dbNote) {
@@ -136,7 +134,7 @@ app.get('/api/thoughts:id', ({ params, body }, res) => {
     });
 });
 
-app.post('/api/thoughts', (req, res) => {
+app.post('/api/thoughts', ({ body }, res) => {
   Thought.create(body)
     .then(dbNote => {
       res.json(dbNote);
@@ -201,10 +199,6 @@ app.delete('/api/thoughts/:thoughtId/reactions', ({ params }, res) => {
       res.json(err);
     });
 }); 
-
-
-
-//
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
