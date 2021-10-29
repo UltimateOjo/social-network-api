@@ -10,16 +10,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/Notedb', {
-  useFindAndModify: false,
+  //useFindAndModify: false,
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  //useUnifiedTopology: true
 });
 
-mongoose.set('useCreateIndex', true);
+//mongoose.set('useCreateIndex', true);
 mongoose.set('debug', true);
 
 //API Routes
 app.get('/api/users', (req, res) => {
+  //res.send("Hello World!");
   User.find({})
     .then(dbNote => {
       res.json(dbNote);
@@ -44,6 +45,7 @@ app.get('/api/users:id', ({ params, body }, res) => {
 });
 
 app.post('/api/users', (req, res) => {
+  console.log(req);
   User.find({})
     .then(dbNote => {
       res.json(dbNote);
@@ -54,6 +56,7 @@ app.post('/api/users', (req, res) => {
 });
 
 app.put('/api/users:id', ({ params }, res) => {
+  console.log(params);
   User.findOneAndDelete({ _id: params.id })
     .then(dbNote => {
       if (!dbNote) {
