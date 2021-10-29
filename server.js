@@ -46,7 +46,7 @@ app.get('/api/users:id', ({ params, body }, res) => {
 
 app.post('/api/users', (req, res) => {
   console.log(req);
-  User.find({})
+  User.create(body)
     .then(dbNote => {
       res.json(dbNote);
     })
@@ -57,7 +57,7 @@ app.post('/api/users', (req, res) => {
 
 app.put('/api/users:id', ({ params }, res) => {
   console.log(params);
-  User.findOneAndDelete({ _id: params.id })
+  User.findOneAndUpdate({ _id: params.id })
     .then(dbNote => {
       if (!dbNote) {
         res.json({ message: 'No note found with this id!' });
@@ -85,7 +85,7 @@ app.delete('/api/users:id', ({ params }, res) => {
 });
 
 app.post('/api/users/:userId/friends/:friendId', ({ params }, res) => {
-  User.findOneAndDelete({ _id: params.id })
+  User.findOneAndUpdate({ _id: params.id })
     .then(dbNote => {
       if (!dbNote) {
         res.json({ message: 'No note found with this id!' });
@@ -137,7 +137,7 @@ app.get('/api/thoughts:id', ({ params, body }, res) => {
 });
 
 app.post('/api/thoughts', (req, res) => {
-  Thought.find({})
+  Thought.create(body)
     .then(dbNote => {
       res.json(dbNote);
     })
@@ -147,7 +147,7 @@ app.post('/api/thoughts', (req, res) => {
 });
 
 app.put('/api/thoughts:id', ({ params }, res) => {
-  Thought.findOneAndDelete({ _id: params.id })
+  Thought.findOneAndUpdate({ _id: params.id })
     .then(dbNote => {
       if (!dbNote) {
         res.json({ message: 'No note found with this id!' });
@@ -175,7 +175,7 @@ app.delete('/api/thoughts:id', ({ params }, res) => {
 });
 
 app.post('/api/thoughts/:thoughtId/reactions', ({ params }, res) => {
-  Thought.findOneAndDelete({ _id: params.id })
+  Thought.findOneAndUpdate({ _id: params.id })
     .then(dbNote => {
       if (!dbNote) {
         res.json({ message: 'No note found with this id!' });
